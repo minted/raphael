@@ -1,5 +1,5 @@
 // ┌─────────────────────────────────────────────────────────────────────┐ \\
-// │ Raphaël - JavaScript Vector Library                                 │ \\
+// │ Raphaël @@VERSION - JavaScript Vector Library                                 │ \\
 // ├─────────────────────────────────────────────────────────────────────┤ \\
 // │ SVG Module                                                          │ \\
 // ├─────────────────────────────────────────────────────────────────────┤ \\
@@ -8,7 +8,21 @@
 // │ Licensed under the MIT (http://raphaeljs.com/license.html) license. │ \\
 // └─────────────────────────────────────────────────────────────────────┘ \\
 
-window.Raphael && window.Raphael.svg && function(R) {
+(function (glob, factory) {
+    if (typeof define === "function" && define.amd) {
+        define("raphael.svg", ["raphael.core"], function(raphael) {
+            factory(raphael);
+        });
+    } else if (typeof exports === "object") {
+        factory(require("raphael.core"));
+    } else {
+        factory(glob.Raphael);
+    }
+}(window || this, function(R) {
+    if (R && !R.svg) {
+        return;
+    }
+
     var has = "hasOwnProperty",
         Str = String,
         toFloat = parseFloat,
@@ -98,7 +112,7 @@ window.Raphael && window.Raphael.svg && function(R) {
                 return null;
             }
             id = id.replace(/[\(\)\s,\xb0#]/g, "_");
-
+            
             if (element.gradient && id != element.gradient.id) {
                 SVG.defs.removeChild(element.gradient);
                 delete element.gradient;
@@ -848,7 +862,7 @@ window.Raphael && window.Raphael.svg && function(R) {
         this.clip && $(this.clip, {transform: this.matrix.invert()});
         this.pattern && updatePosition(this);
         this.node && $(this.node, {transform: this.matrix});
-
+    
         if (_.sx != 1 || _.sy != 1) {
             var sw = this.attrs[has]("stroke-width") ? this.attrs["stroke-width"] : 1;
             this.attr({"stroke-width": sw});
@@ -940,7 +954,7 @@ window.Raphael && window.Raphael.svg && function(R) {
             bbox = bbox || {};
             if(canvasHidden){
               containerStyle.display = "none";
-            }
+        }
         }
         hide && this.hide();
         return bbox;
@@ -1400,4 +1414,4 @@ window.Raphael && window.Raphael.svg && function(R) {
             };
         })(method);
     }
-}(window.Raphael);
+}));
