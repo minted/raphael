@@ -13,10 +13,10 @@
             return (glob.Raphael = factory(Raphael));
         });
     } else if (typeof exports === "object") {
-        var raphael = require("raphael.core");
+        var raphael = require("./raphael.core");
 
-        require("raphael.svg");
-        require("raphael.vml");
+        require("./raphael.svg");
+        require("./raphael.vml");
 
         module.exports = factory(raphael);
     } else {

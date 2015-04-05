@@ -14,7 +14,7 @@
             factory(raphael);
         });
     } else if (typeof exports === "object") {
-        factory(require("raphael.core"));
+        factory(require("./raphael.core"));
     } else {
         factory(glob.Raphael);
     }
@@ -112,7 +112,7 @@
                 return null;
             }
             id = id.replace(/[\(\)\s,\xb0#]/g, "_");
-            
+
             if (element.gradient && id != element.gradient.id) {
                 SVG.defs.removeChild(element.gradient);
                 delete element.gradient;
@@ -862,7 +862,7 @@
         this.clip && $(this.clip, {transform: this.matrix.invert()});
         this.pattern && updatePosition(this);
         this.node && $(this.node, {transform: this.matrix});
-    
+
         if (_.sx != 1 || _.sy != 1) {
             var sw = this.attrs[has]("stroke-width") ? this.attrs["stroke-width"] : 1;
             this.attr({"stroke-width": sw});

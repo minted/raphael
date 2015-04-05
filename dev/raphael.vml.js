@@ -14,7 +14,7 @@
             factory(raphael);
         });
     } else if (typeof exports === "object") {
-        factory(require("raphael"));
+        factory(require("./raphael.core"));
     } else {
         factory(glob.Raphael);
     }
